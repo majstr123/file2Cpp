@@ -12,6 +12,7 @@ For the lazy ones there is aslo the .exe version :)<br>
 Btw, this is my first git commit, so sory for any mistake! 
 
 example output for C:\\your path\index.html and C:\\your path\css\style.css input file.<br>
+![](screenshots/screenshot.png)<br>
 raw file size = 10.727 bytes, compressed to gzip = 1.804 bytes -->> ~83% reduction<br>
 raw file size = 13.975 bytes, compressed to gzip = 2.906 bytes -->> ~79% reduction<br>
 
