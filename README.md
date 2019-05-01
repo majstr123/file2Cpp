@@ -1,20 +1,19 @@
 # file2Cpp
-This tool is ment for use when developing ESP8266/ESP32 web applications, where website lives within device program memory.
+This tool is ment for use when developing ESP8266/ESP32 web applications, where website lives within device program memory.<br>
 Input to program is any file, output is gziped version of byte array inside C/C++ header type file.
 
 
 # !!! Important  !!!
-Program requires instalation of 7-zip inside "C:\Program Files\7-Zip"
+Program requires instalation of 7-zip inside "C:\Program Files\7-Zip"<br>
 
-Feel free to change to your needs. 
+Feel free to change to your needs.<br>
 
-For the lazy ones there is aslo the .exe version :)
-
+For the lazy ones there is aslo the .exe version :)<br>
 Btw, this is my first git commit, so sory for any mistake! 
 
-example output for C:\\your path\index.html and C:\\your path\css\style.css input file.
-raw file size = 10.727 bytes, compressed to gzip = 1.804 bytes -->> ~83% reduction
-raw file size = 13.975 bytes, compressed to gzip = 2.906 bytes -->> ~79% reduction
+example output for C:\\your path\index.html and C:\\your path\css\style.css input file.<br>
+raw file size = 10.727 bytes, compressed to gzip = 1.804 bytes -->> ~83% reduction<br>
+raw file size = 13.975 bytes, compressed to gzip = 2.906 bytes -->> ~79% reduction<br>
 
 index.h:
 ```c++
