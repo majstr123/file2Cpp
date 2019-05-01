@@ -8,6 +8,7 @@
 #include <QProcess>
 #include <QThread>
 #include <QStandardPaths>
+#include <QDateTime>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -50,17 +51,24 @@ void MainWindow::on_SelWorkDir_clicked()
 
 void MainWindow::on_AddFile_clicked()
 {
-    QString tmp = (QFileDialog::getOpenFileName(this,"Open file",workingDir)).split(workingDir+"/").last();
-    bool test=false;
-    foreach (QString fileName, filesToCompress) {
-        if (fileName==tmp) {
-            test= true;
-            qDebug()<<"file already exist";
+    QStringList filenames = QFileDialog::getOpenFileNames(this,tr("Open files"),workingDir,tr("All files (*.*)") );
+    if( !filenames.isEmpty() )
+    {
+        for (int i =0; i<filenames.size(); i++){
+            bool test=false;
+            QString file = filenames[i].split(workingDir+"/").last();
+            foreach (QString fileName, filesToCompress) {
+                if (fileName==file) {
+                    test= true;
+                    qDebug()<<"file already exist";
+                }
+            }
+            if(!test){
+                filesToCompress<<file;
+            }
         }
     }
-    if(!test){
-        filesToCompress<<tmp;
-    }
+
     QSettings settings("Sett","Sett");
     settings.setValue("filesToCompress",filesToCompress);
     model.setStringList( filesToCompress );
@@ -179,6 +187,12 @@ void MainWindow::convert(QString inputFile , QString outputFile, QString headerD
     FILE *fileIn, *fileOut; //< input and output file
 
 
+    QDateTime now = QDateTime::currentDateTime();
+    QString timeLine="/*\n\tThis file was created on "+now.toString("dd. MM. yy")+" at "+now.toString("hh:mm:ss")+"\n*/";
+    qDebug()<<timeLine;
+
+
+
     // start processing
     fileIn = fopen(inputFile.toStdString().c_str(), "rb"); // open input file (binary)
     if (fileIn==nullptr)
@@ -216,7 +230,7 @@ void MainWindow::convert(QString inputFile , QString outputFile, QString headerD
 
     // copy the file into the buffer.
     fread (buffer,1,lSize,fileIn);
-    fprintf(fileOut,"#ifndef %s\n#define %s\nconst char %s[] PROGMEM = {\n",headerDef.toStdString().c_str(),headerDef.toStdString().c_str(),headerVar.toStdString().c_str());
+    fprintf(fileOut,"#ifndef %s\n#define %s\n%s\nconst char %s[] PROGMEM = {\n",headerDef.toStdString().c_str(),headerDef.toStdString().c_str(),timeLine.toStdString().c_str(),headerVar.toStdString().c_str());
 
     stringlength = 4 + strlen(separator);	//length of single converted string
     for(i=0; i<lSize-1; i++)
