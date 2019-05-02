@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>file2Cpp</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icon.ico</normaloff>:/icon.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
@@ -59,7 +63,7 @@
        <item row="1" column="0">
         <widget class="QPushButton" name="AddFile">
          <property name="text">
-          <string>Add file</string>
+          <string>Add files</string>
          </property>
         </widget>
        </item>
@@ -103,6 +107,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
