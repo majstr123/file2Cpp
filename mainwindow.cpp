@@ -21,7 +21,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 void MainWindow::initSettigs(){
     qDebug()<<QDir::homePath();
     QSettings settings("Sett","Sett");
